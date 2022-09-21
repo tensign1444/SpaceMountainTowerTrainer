@@ -1,7 +1,9 @@
-﻿internal class Program
+﻿using RollerCoasterSimulatorLib;
+internal class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Fred fred = new Fred();
+        fred.TestRockets();
     }
 }

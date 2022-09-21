@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RollerCoasterSimulatorLib.Track
+namespace RollerCoasterSimulatorLib.Map
 {
     /// <summary>
     /// A class which holds all the zones in memory
@@ -20,7 +21,7 @@ namespace RollerCoasterSimulatorLib.Track
         /// <param name="name"> name of zone</param>
         /// <param name="minTime"> min time in zone</param>
         /// <param name="maxTime"> max time in zone</param>
-        public static void Add(string name, int minTime, int maxTime)
+        public static void Add(string name, double minTime = 0, double maxTime = 0)
         {
             zones.Add(new Zone(name, minTime, maxTime));
         }
@@ -56,7 +57,7 @@ namespace RollerCoasterSimulatorLib.Track
     /// <summary>
     /// Custom structure for a zone within the track
     /// </summary>
-    public struct Zone
+    public class Zone
     {
 
         /// <summary>
@@ -65,12 +66,17 @@ namespace RollerCoasterSimulatorLib.Track
         /// <param name="name"></param>
         /// <param name="minTime"></param>
         /// <param name="maxTime"></param>
-        public Zone(string name, int minTime, int maxTime)
+        public Zone(string name, double minTime, double maxTime, bool isOccupied = false)
         {
             this.name = name;
             this.minTime = minTime;
             this.maxTime = maxTime;
+            this.isOccupied = isOccupied;
         }
+
+        public Zone nextZone { get; set; }
+
+        public bool isOccupied { get; set ; }
 
         /// <summary>
         /// Name of the zone
@@ -80,12 +86,12 @@ namespace RollerCoasterSimulatorLib.Track
         /// <summary>
         /// Min time for a cart to occupy a zone
         /// </summary>
-        public int minTime { get; set; }
+        public double minTime { get; set; }
 
         /// <summary>
         /// Max time for a cart to occupy a zone
         /// </summary>
-        public int maxTime { get; set; }
+        public double maxTime { get; set; }
     }
 
 
